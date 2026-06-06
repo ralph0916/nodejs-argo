@@ -1,0 +1,934 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>GreenEarth | 守护绿色地球，共创可持续未来</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&family=Noto+Sans+SC:wght@300;400;500;700&display=swap" rel="stylesheet">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: 'Noto Sans SC', sans-serif;
+            line-height: 1.6;
+            color: #2d3748;
+            background-color: #f4f9f4;
+        }
+        
+        h1, h2, h3, h4 {
+            font-family: 'Poppins', 'Noto Sans SC', sans-serif;
+            font-weight: 600;
+            line-height: 1.3;
+        }
+        
+        .container {
+            width: 100%;
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+        
+        /* 导航栏样式 */
+        header {
+            background-color: rgba(255, 255, 255, 0.95);
+            box-shadow: 0 2px 15px rgba(0, 0, 0, 0.05);
+            position: fixed;
+            width: 100%;
+            z-index: 1000;
+            backdrop-filter: blur(5px);
+        }
+        
+        nav {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 15px 0;
+        }
+        
+        .logo {
+            display: flex;
+            align-items: center;
+        }
+        
+        .logo-icon {
+            color: #2ec4b6;
+            font-size: 28px;
+            margin-right: 10px;
+        }
+        
+        .logo-text {
+            font-size: 24px;
+            font-weight: 700;
+            color: #1a4301;
+        }
+        
+        .logo-text span {
+            color: #2ec4b6;
+        }
+        
+        .nav-links {
+            display: flex;
+            list-style: none;
+        }
+        
+        .nav-links li {
+            margin-left: 30px;
+        }
+        
+        .nav-links a {
+            text-decoration: none;
+            color: #4a5568;
+            font-weight: 500;
+            transition: color 0.3s;
+        }
+        
+        .nav-links a:hover {
+            color: #2ec4b6;
+        }
+        
+        .cta-button {
+            background-color: #2ec4b6;
+            color: white;
+            border: none;
+            padding: 12px 28px;
+            border-radius: 50px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: background-color 0.3s, transform 0.2s;
+        }
+        
+        .cta-button:hover {
+            background-color: #209f93;
+            transform: translateY(-2px);
+        }
+        
+        .mobile-menu-btn {
+            display: none;
+            background: none;
+            border: none;
+            font-size: 24px;
+            color: #333;
+            cursor: pointer;
+        }
+        
+        /* 首屏展示区 (Hero Section) */
+        .hero {
+            padding: 180px 0 100px;
+            background: linear-gradient(135deg, #eaf5ea 0%, #f4f9f4 100%);
+        }
+        
+        .hero-content {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+        }
+        
+        .hero-text {
+            flex: 1;
+            padding-right: 40px;
+        }
+        
+        .hero-text h1 {
+            font-size: 46px;
+            margin-bottom: 20px;
+            color: #1a4301;
+        }
+        
+        .hero-text h1 span {
+            color: #2ec4b6;
+        }
+        
+        .hero-text p {
+            font-size: 18px;
+            color: #4a5568;
+            margin-bottom: 30px;
+            max-width: 600px;
+        }
+        
+        .hero-buttons {
+            display: flex;
+            gap: 15px;
+        }
+        
+        .secondary-button {
+            background-color: transparent;
+            color: #2ec4b6;
+            border: 2px solid #2ec4b6;
+            padding: 12px 28px;
+            border-radius: 50px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s;
+        }
+        
+        .secondary-button:hover {
+            background-color: rgba(46, 196, 182, 0.1);
+        }
+        
+        .hero-image {
+            flex: 1;
+            text-align: center;
+        }
+        
+        .hero-image img {
+            max-width: 100%;
+            border-radius: 20px;
+            box-shadow: 0 20px 40px rgba(26, 67, 1, 0.1);
+        }
+        
+        /* 通用板块标题样式 */
+        .section-title {
+            text-align: center;
+            margin-bottom: 60px;
+        }
+        
+        .section-title h2 {
+            font-size: 36px;
+            color: #1a4301;
+            margin-bottom: 15px;
+        }
+        
+        .section-title p {
+            color: #718096;
+            max-width: 700px;
+            margin: 0 auto;
+        }
+        
+        /* 核心焦点/倡议行动板块 */
+        .features {
+            padding: 100px 0;
+            background-color: white;
+        }
+        
+        .features-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 40px;
+        }
+        
+        .feature-card {
+            background: #fdfdfd;
+            padding: 30px;
+            border-radius: 15px;
+            box-shadow: 0 5px 20px rgba(0, 0, 0, 0.02);
+            border: 1px solid #edf2f7;
+            transition: transform 0.3s, box-shadow 0.3s;
+        }
+        
+        .feature-card:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 15px 30px rgba(46, 196, 182, 0.1);
+        }
+        
+        .feature-icon {
+            background-color: #eaf5ea;
+            color: #2ec4b6;
+            width: 70px;
+            height: 70px;
+            border-radius: 20px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin-bottom: 20px;
+            font-size: 28px;
+        }
+        
+        .feature-card h3 {
+            font-size: 22px;
+            color: #2d3748;
+            margin-bottom: 15px;
+        }
+        
+        .feature-card p {
+            color: #718096;
+        }
+        
+        /* 环保成效数据统计板块 */
+        .benefits {
+            padding: 100px 0;
+            background-color: #eaf5ea;
+        }
+        
+        .benefits-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 30px;
+        }
+        
+        .benefit-item {
+            text-align: center;
+            padding: 30px 20px;
+            background: white;
+            border-radius: 15px;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.02);
+        }
+        
+        .benefit-icon {
+            color: #2ec4b6;
+            font-size: 40px;
+            margin-bottom: 15px;
+        }
+        
+        .benefit-item h3 {
+            font-size: 32px;
+            color: #1a4301;
+            margin-bottom: 10px;
+        }
+        
+        .benefit-item p {
+            color: #4a5568;
+            font-weight: 500;
+        }
+        
+        /* 环保志愿者评价板块 */
+        .testimonials {
+            padding: 100px 0;
+            background-color: white;
+        }
+        
+        .testimonial-slider {
+            max-width: 800px;
+            margin: 0 auto;
+            position: relative;
+        }
+        
+        .testimonial {
+            background: #f4f9f4;
+            padding: 40px;
+            border-radius: 15px;
+            text-align: center;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.02);
+        }
+        
+        .testimonial-text {
+            font-size: 18px;
+            font-style: italic;
+            margin-bottom: 30px;
+            color: #4a5568;
+        }
+        
+        .testimonial-author {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+        
+        .author-avatar {
+            width: 60px;
+            height: 60px;
+            border-radius: 50%;
+            background-color: #2ec4b6;
+            margin-right: 15px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: bold;
+            color: white;
+            font-size: 20px;
+        }
+        
+        .author-info h4 {
+            font-size: 18px;
+            color: #2d3748;
+            margin-bottom: 5px;
+            text-align: left;
+        }
+        
+        .author-info p {
+            color: #718096;
+            font-size: 14px;
+            text-align: left;
+        }
+        
+        /* 参与支持方式/常见问答板块 */
+        .pricing {
+            padding: 100px 0;
+            background-color: #f4f9f4;
+        }
+        
+        .pricing-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 30px;
+        }
+        
+        .pricing-card {
+            background: white;
+            border-radius: 15px;
+            padding: 40px 30px;
+            box-shadow: 0 5px 20px rgba(0, 0, 0, 0.02);
+            text-align: center;
+            transition: transform 0.3s;
+            border: 1px solid #edf2f7;
+        }
+        
+        .pricing-card.featured {
+            border-top: 5px solid #2ec4b6;
+            transform: scale(1.05);
+            position: relative;
+        }
+        
+        .featured-badge {
+            position: absolute;
+            top: -12px;
+            left: 50%;
+            transform: translateX(-50%);
+            background-color: #2ec4b6;
+            color: white;
+            padding: 5px 20px;
+            border-radius: 20px;
+            font-size: 14px;
+            font-weight: 600;
+        }
+        
+        .pricing-card:hover {
+            transform: translateY(-10px);
+        }
+        
+        .pricing-card.featured:hover {
+            transform: scale(1.05) translateY(-10px);
+        }
+        
+        .plan-name {
+            font-size: 24px;
+            margin-bottom: 15px;
+            color: #1a4301;
+        }
+        
+        .plan-price {
+            font-size: 36px;
+            font-weight: 700;
+            color: #2ec4b6;
+            margin-bottom: 20px;
+        }
+        
+        .plan-price span {
+            font-size: 16px;
+            color: #718096;
+        }
+        
+        .plan-features {
+            list-style: none;
+            margin-bottom: 30px;
+            text-align: left;
+        }
+        
+        .plan-features li {
+            padding: 12px 0;
+            border-bottom: 1px solid #edf2f7;
+            color: #4a5568;
+            display: flex;
+            align-items: center;
+        }
+        
+        .plan-features li i {
+            color: #2ec4b6;
+            margin-right: 10px;
+        }
+        
+        .plan-features li:last-child {
+            border-bottom: none;
+        }
+        
+        /* 呼吁行动条 (Call to Action Section) */
+        .cta-section {
+            padding: 100px 0;
+            background: linear-gradient(135deg, #2ec4b6 0%, #209f93 100%);
+            text-align: center;
+            color: white;
+        }
+        
+        .cta-section h2 {
+            font-size: 36px;
+            margin-bottom: 20px;
+        }
+        
+        .cta-section p {
+            font-size: 18px;
+            max-width: 700px;
+            margin: 0 auto 30px;
+            opacity: 0.9;
+        }
+        
+        .cta-section .cta-button {
+            background-color: white;
+            color: #2ec4b6;
+            font-size: 16px;
+            padding: 15px 40px;
+        }
+        
+        .cta-section .cta-button:hover {
+            background-color: #eaf5ea;
+        }
+        
+        /* 页脚 */
+        footer {
+            background-color: #1a2315;
+            color: #a0aec0;
+            padding: 70px 0 20px;
+        }
+        
+        .footer-content {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 40px;
+            margin-bottom: 50px;
+        }
+        
+        .footer-column h3 {
+            font-size: 18px;
+            color: white;
+            margin-bottom: 25px;
+        }
+        
+        .footer-links {
+            list-style: none;
+        }
+        
+        .footer-links li {
+            margin-bottom: 12px;
+        }
+        
+        .footer-links a {
+            color: #a0aec0;
+            text-decoration: none;
+            transition: color 0.3s;
+        }
+        
+        .footer-links a:hover {
+            color: #2ec4b6;
+        }
+        
+        .copyright {
+            text-align: center;
+            padding-top: 20px;
+            border-top: 1px solid #2d3748;
+            font-size: 14px;
+            color: #718096;
+        }
+        
+        /* 响应式设计适配 */
+        @media (max-width: 992px) {
+            .hero-content {
+                flex-direction: column;
+            }
+            
+            .hero-text {
+                padding-right: 0;
+                margin-bottom: 50px;
+                text-align: center;
+            }
+            
+            .hero-text p {
+                margin: 0 auto 30px;
+            }
+            
+            .pricing-card.featured {
+                transform: none;
+            }
+            
+            .pricing-card.featured:hover {
+                transform: translateY(-10px);
+            }
+        }
+        
+        @media (max-width: 768px) {
+            .nav-links {
+                display: none;
+            }
+            
+            .mobile-menu-btn {
+                display: block;
+            }
+            
+            .hero-text h1 {
+                font-size: 34px;
+            }
+            
+            .section-title h2 {
+                font-size: 28px;
+            }
+            
+            .hero-buttons {
+                flex-direction: column;
+                align-items: center;
+            }
+            
+            .hero-buttons button {
+                width: 100%;
+                max-width: 300px;
+            }
+        }
+        
+        @media (max-width: 576px) {
+            .hero {
+                padding: 140px 0 70px;
+            }
+            
+            .features, .benefits, .testimonials, .pricing, .cta-section {
+                padding: 60px 0;
+            }
+            
+            .feature-card, .testimonial {
+                padding: 25px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <div class="container">
+            <nav>
+                <div class="logo">
+                    <div class="logo-icon"><i class="fas fa-leaf"></i></div>
+                    <div class="logo-text">Green<span>Earth</span></div>
+                </div>
+                
+                <ul class="nav-links">
+                    <li><a href="#features">核心聚焦</a></li>
+                    <li><a href="#benefits">守护成果</a></li>
+                    <li><a href="#testimonials">见证力量</a></li>
+                    <li><a href="#pricing">加入我们</a></li>
+                    <li><a href="#">环保资讯</a></li>
+                </ul>
+                
+                <button class="cta-button">行动起来</button>
+                <button class="mobile-menu-btn"><i class="fas fa-bars"></i></button>
+            </nav>
+        </div>
+    </header>
+
+    <section class="hero">
+        <div class="container">
+            <div class="hero-content">
+                <div class="hero-text">
+                    <h1>种下一棵树，<span>为地球留住绿色</span></h1>
+                    <p>GreenEarth 是一个致力于倡导可持续生活与生态修复的环保组织。通过汇聚全球志愿者的力量，我们推动减塑、碳中和以及森林重塑，共同守护这个我们赖以生存的唯一家园。</p>
+                    <div class="hero-buttons">
+                        <button class="cta-button">成为环保志愿者</button>
+                        <button class="secondary-button">了解更多项目</button>
+                    </div>
+                </div>
+                <div class="hero-image">
+                    <img src="https://images.unsplash.com/photo-1448375240586-882707db888b?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80" alt="美丽的可持续森林景观">
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section class="features" id="features">
+        <div class="container">
+            <div class="section-title">
+                <h2>我们的四大环境行动倡议</h2>
+                <p>我们采取实际行动，从身边的小事做起，并推行长期生态修复项目，全方位减缓气候变化。目标在十年内实现显著的生态改善。</p>
+            </div>
+            
+            <div class="features-grid">
+                <div class="feature-card">
+                    <div class="feature-icon">
+                        <i class="fas fa-tree"></i>
+                    </div>
+                    <h3>森林再造计划</h3>
+                    <p>在干旱和荒漠化严重的地区进行植树造林，保护当地生物多样性，锁住水分，修复脆弱的土地生态系统。</p>
+                </div>
+                
+                <div class="feature-card">
+                    <div class="feature-icon">
+                        <i class="fas fa-recycle"></i>
+                    </div>
+                    <h3>零废弃低碳生活</h3>
+                    <p>倡导源头减塑，推广分类回收。通过社区共建，让循环经济和低碳替代品进入每个家庭的日常生活。</p>
+                </div>
+                
+                <div class="feature-card">
+                    <div class="feature-icon">
+                        <i class="fas fa-sun"></i>
+                    </div>
+                    <h3>清洁能源推广</h3>
+                    <p>支持并资助欠发达地区的太阳能与风能小型设施建设，帮助当地居民摆脱传统薪柴污染，拥抱绿色电力。</p>
+                </div>
+                
+                <div class="feature-card">
+                    <div class="feature-icon">
+                        <i class="fas fa-tint"></i>
+                    </div>
+                    <h3>水源与海洋保护</h3>
+                    <p>定期组织志愿者清理海滩垃圾，监测内陆河流生态健康度，向公众普及保护水资源的重要常识。</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section class="benefits" id="benefits">
+        <div class="container">
+            <div class="section-title">
+                <h2>齐心协力，我们已经创造的改变</h2>
+                <p>数字是行动力最好的见证。在过去的几年中，正是因为每一位绿色同路人的付出，地球正在慢慢恢复微笑。</p>
+            </div>
+            
+            <div class="benefits-grid">
+                <div class="benefit-item">
+                    <div class="benefit-icon"><i class="fas fa-seedling"></i></div>
+                    <h3>150万+</h3>
+                    <p>成功栽种并存活的树木</p>
+                </div>
+                
+                <div class="benefit-item">
+                    <div class="benefit-icon"><i class="fas fa-cloud"></i></div>
+                    <h3>3,200吨</h3>
+                    <p>累计减少碳排放总量</p>
+                </div>
+                
+                <div class="benefit-item">
+                    <div class="benefit-icon"><i class="fas fa-user-friends"></i></div>
+                    <h3>50,000+</h3>
+                    <p>全球注册活跃志愿者</p>
+                </div>
+                
+                <div class="benefit-item">
+                    <div class="benefit-icon"><i class="fas fa-water"></i></div>
+                    <h3>120公里</h3>
+                    <p>完成清理保护的海岸线</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section class="testimonials" id="testimonials">
+        <div class="container">
+            <div class="section-title">
+                <h2>听听他们的环保心声</h2>
+                <p>每一个微小的行动，都有改变世界的力量。来看看正在参与其中的志愿者们怎么说。</p>
+            </div>
+            
+            <div class="testimonial-slider">
+                <div class="testimonial">
+                    <div class="testimonial-text">
+                        “加入 GreenEarth 让我第一次意识到环保不是一句口号。去年冬天我参与了阿拉善地区的植树行动，当看到亲手种下的红柳在春天发芽时，内心的成就感无可比拟。”
+                    </div>
+                    <div class="testimonial-author">
+                        <div class="author-avatar">张伟</div>
+                        <div class="author-info">
+                            <h4>张伟</h4>
+                            <p>高校青年环保志愿者 / 参与时间：2年</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section class="pricing" id="pricing">
+        <div class="container">
+            <div class="section-title">
+                <h2>选择属于你的支持方式</h2>
+                <p>无论你是想付出时间、改变生活习惯，还是提供资金援助，你的每一种方式都在让世界更美好。</p>
+            </div>
+            
+            <div class="pricing-grid">
+                <div class="pricing-card">
+                    <h3 class="plan-name">日常践行者</h3>
+                    <div class="plan-price">免费<span> / 永久</span></div>
+                    <ul class="plan-features">
+                        <li><i class="fas fa-check"></i> 承诺每周一次无塑购物</li>
+                        <li><i class="fas fa-check"></i> 电子化获取低碳生活指南</li>
+                        <li><i class="fas fa-check"></i> 参与线上低碳打卡挑战</li>
+                        <li><i class="fas fa-check"></i> 基础社区活动支持</li>
+                    </ul>
+                    <button class="secondary-button">订阅绿色指南</button>
+                </div>
+                
+                <div class="pricing-card featured">
+                    <div class="featured-badge">主流推崇</div>
+                    <h3 class="plan-name">行动志愿者</h3>
+                    <div class="plan-price">投入精力<span> / 乐于奉献</span></div>
+                    <ul class="plan-features">
+                        <li><i class="fas fa-check"></i> 优先报名线下植树与净滩</li>
+                        <li><i class="fas fa-check"></i> 免费获得志愿者官方证书</li>
+                        <li><i class="fas fa-check"></i> 专属的环保知识线下培训</li>
+                        <li><i class="fas fa-check"></i> 结识志同道合的绿色伙伴</li>
+                        <li><i class="fas fa-check"></i> 尊享官方定制环保周边</li>
+                    </ul>
+                    <button class="cta-button">立即报名加入</button>
+                </div>
+                
+                <div class="pricing-card">
+                    <h3 class="plan-name">生态守护人</h3>
+                    <div class="plan-price">￥9.9<span> / 月起(认养)</span></div>
+                    <ul class="plan-features">
+                        <li><i class="fas fa-check"></i> 远程认养专属幼苗/森林</li>
+                        <li><i class="fas fa-check"></i> 定期获取树木生长照片反馈</li>
+                        <li><i class="fas fa-check"></i> 资金全透明公开用于种植</li>
+                        <li><i class="fas fa-check"></i> 写入 GreenEarth 荣誉墙</li>
+                    </ul>
+                    <button class="secondary-button">开启认养计划</button>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section class="cta-section">
+        <div class="container">
+            <h2>即刻开启你的低碳环保之旅</h2>
+            <p>为后代留下一片蓝天、清水与绿地。今天的一个小动作，就是明天的一片森林。加入全球一万多个家庭和企业，和 GreenEarth 一起守护地球！</p>
+            <button class="cta-button">立即行动</button>
+        </div>
+    </section>
+
+    <footer>
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-column">
+                    <div class="logo">
+                        <div class="logo-icon"><i class="fas fa-leaf"></i></div>
+                        <div class="logo-text" style="color: white;">Green<span>Earth</span></div>
+                    </div>
+                    <p style="margin-top: 20px; color: #a0aec0;">领先的民间生态环保组织，专注于可持续森林修复、减塑倡导和绿色未来共创。</p>
+                </div>
+                
+                <div class="footer-column">
+                    <h3>公益项目</h3>
+                    <ul class="footer-links">
+                        <li><a href="#">百万植树计划</a></li>
+                        <li><a href="#">零塑料社区</a></li>
+                        <li><a href="#">保护蔚蓝海洋</a></li>
+                        <li><a href="#">乡村绿色光伏</a></li>
+                        <li><a href="#">少儿环保科普</a></li>
+                    </ul>
+                </div>
+                
+                <div class="footer-column">
+                    <h3>志愿者资源</h3>
+                    <ul class="footer-links">
+                        <li><a href="#">行动安全手册</a></li>
+                        <li><a href="#">环保习惯100例</a></li>
+                        <li><a href="#">碳足迹计算器</a></li>
+                        <li><a href="#">活动精彩图集</a></li>
+                        <li><a href="#">求助与支持</a></li>
+                    </ul>
+                </div>
+                
+                <div class="footer-column">
+                    <h3>关于组织</h3>
+                    <ul class="footer-links">
+                        <li><a href="#">使命与理念</a></li>
+                        <li><a href="#">财务公开报告</a></li>
+                        <li><a href="#">加入我们(全职)</a></li>
+                        <li><a href="#">联系我们</a></li>
+                        <li><a href="#">隐私与条款</a></li>
+                    </ul>
+                </div>
+            </div>
+            
+            <div class="copyright">
+                <p>&copy; 2026 GreenEarth 组织。用行动守护绿色生态。保留所有权利。</p>
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        // 手机端菜单展开/折叠交互
+        document.querySelector('.mobile-menu-btn').addEventListener('click', function() {
+            const navLinks = document.querySelector('.nav-links');
+            navLinks.style.display = navLinks.style.display === 'flex' ? 'none' : 'flex';
+            
+            if (window.innerWidth <= 768) {
+                if (navLinks.style.display === 'flex') {
+                    navLinks.style.flexDirection = 'column';
+                    navLinks.style.position = 'absolute';
+                    navLinks.style.top = '75px';
+                    navLinks.style.left = '0';
+                    navLinks.style.width = '100%';
+                    navLinks.style.backgroundColor = 'white';
+                    navLinks.style.padding = '20px';
+                    navLinks.style.boxShadow = '0 10px 20px rgba(0,0,0,0.05)';
+                    
+                    const navItems = document.querySelectorAll('.nav-links li');
+                    navItems.forEach(item => {
+                        item.style.margin = '10px 0';
+                    });
+                }
+            }
+        });
+        
+        // 锚点平滑滚动效果
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function(e) {
+                e.preventDefault();
+                
+                const targetId = this.getAttribute('href');
+                if(targetId === '#') return;
+                
+                const targetElement = document.querySelector(targetId);
+                if(targetElement) {
+                    window.scrollTo({
+                        top: targetElement.offsetTop - 80,
+                        behavior: 'smooth'
+                    });
+                    
+                    if(window.innerWidth <= 768) {
+                        document.querySelector('.nav-links').style.display = 'none';
+                    }
+                }
+            });
+        });
+        
+        // 志愿者真实故事自动轮播
+        const testimonials = [
+            {
+                text: "“加入 GreenEarth 让我第一次意识到环保不是一句口号。去年冬天我参与了阿拉善地区的植树行动，当看到亲手种下的红柳在春天发芽时，内心的成就感无可比拟。”",
+                name: "张伟",
+                position: "高校青年环保志愿者 / 参与时间：2年"
+            },
+            {
+                text: "“我带着全家参加了社区的零塑料生活工作坊。通过GreenEarth的悉心指导，我们全家现在出门自带布袋和水杯，每个月产生的塑料垃圾减少了80%！”",
+                name: "李静",
+                position: "职场妈妈、环保实践者 / 参与时间：1年"
+            },
+            {
+                text: "“作为企业负责人，我们通过 GreenEarth 平台认养了一片‘企业森林’。这不仅帮助我们企业履行了社会责任，更让全体员工拥有了强烈的社会参与感。”",
+                name: "王博",
+                position: "某科技企业创始人 / 参与时间：3年"
+            }
+        ];
+        
+        let currentTestimonial = 0;
+        const testimonialElement = document.querySelector('.testimonial');
+        
+        function rotateTestimonial() {
+            currentTestimonial = (currentTestimonial + 1) % testimonials.length;
+            updateTestimonial();
+        }
+        
+        function updateTestimonial() {
+            const testimonial = testimonials[currentTestimonial];
+            testimonialElement.innerHTML = `
+                <div class="testimonial-text">${testimonial.text}</div>
+                <div class="testimonial-author">
+                    <div class="author-avatar">${testimonial.name.substring(0,1)}</div>
+                    <div class="author-info">
+                        <h4>${testimonial.name}</h4>
+                        <p>${testimonial.position}</p>
+                    </div>
+                </div>
+            `;
+        }
+        
+        // 每 5 秒自动切换一次志愿者见证内容
+        setInterval(rotateTestimonial, 5000);
+        
+        // 按钮点击提示互动
+        document.querySelectorAll('.cta-button, .secondary-button').forEach(button => {
+            button.addEventListener('click', function() {
+                const buttonText = this.textContent;
+                alert(`感谢您对 GreenEarth 环保倡议的关注！\n在真实环境中，点击“${buttonText}”将会跳转至相应的活动报名或指南下载页面。`);
+            });
+        });
+    </script>
+</body>
+</html>
